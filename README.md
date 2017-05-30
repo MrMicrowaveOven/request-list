@@ -25,3 +25,11 @@ I had a few early decisions to make before I even started coding.
 1. Should I make a full Rails application with html.erb frontend?  Or just make a Rails API with HTML frontend?  This was primarily answered by the "without reloading the page" comment in Step 3.  In my experience html.erb is better for one-request-per-page, where a request tends to refresh the page.  I'm guessing this can be bypassed, but I'd probably be better off making an HTML form that simply makes an AJAX request to the Rails API.
 
 2. What API methods will I need?  I know I'll need Create, but what else?  It seems like displaying all requests will involve an Index call, but the instructions only mention the submit button affecting the list.  So then will the list not remember if the page is refreshed?  So all in all I see two options: a) Only build Create, and that's what adds to the list.  b) Build Create and Index, and have the Index call made when the page is loaded.  I'll make both, and see if I end up using Index.
+
+# Implementation Time
+
+## Rails API
+
+This went by quickly.  I decided to use the `--api` flag when generating my API, since it makes the Application Controllers a little skinnier (uses `::API` as a parent instead of `::Base`).  I wouldn't need them to have browser application functionalities anyway.  This also prevents the generators from adding views and helpers that I won't end up using.
+
+I quickly built the Requests Controller, with a simple Create and Index.  Nothing too unique about it, other than Create only returning the `created_at` data.  After a quick Post request on PostMan, and a Get request to check, I figured it was time to work on the FrontEnd.
