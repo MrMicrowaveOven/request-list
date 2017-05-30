@@ -1,11 +1,15 @@
 class RequestsController < ApplicationController
   def create
-    # @request = Request.new(request_params)
-    # @request.save
-
+    @request = Request.new(request_params)
+    if @request.save
+      render json: @request.created_at
+    else
+      render json: "POST FAILURE"
+    end
   end
+
   def index
-    render json: {this: "isAwesome1"}
+    render json: Request.all
   end
 
   private
