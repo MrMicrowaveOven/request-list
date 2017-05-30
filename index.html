@@ -3,13 +3,42 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
   </head>
   <body>
+    <input type="text" name="" value="" id="content">
     <button type="button" name="button" onclick="addRequest()">Add Request</button>
+    <div class="request_count">
+
+    </div>
+    <div class="request_text">
+      requests
+    </div>
+    <div class="requests">
+
+    </div>
     <script type="text/javascript">
       function addRequest() {
-        console.log("Hi!");
-      }
+        $.ajax({
+          type: "POST",
+          url: "/requests",
+          data: {
+              "content": "4ever"
+          },
+          success: function (res) {
+              console.log("Success!!!");
+          },
+          error: function (xhr, status, error) {
+            // if (xhr.status === 403) {
+            //   document.getElementById("response").innerHTML
+            //     = "Sorry, ran out of pings for today :(";
+            // } else {
+            //   document.getElementById("response").innerHTML = "Error #" + xhr.status;
+            // }
+              console.log("Fail");
+          }
+      })
+    }
     </script>
   </body>
 </html>
