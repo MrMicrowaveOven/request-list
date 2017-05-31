@@ -16,7 +16,6 @@ require "rails/test_unit/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-# config.assets.initialize_on_precompile = false
 module RequestList
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
@@ -31,6 +30,7 @@ module RequestList
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
+    config.assets.initialize_on_precompile = false
     config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins '*'
