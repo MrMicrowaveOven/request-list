@@ -12,6 +12,12 @@ class RequestsController < ApplicationController
     render json: Request.all
   end
 
+  def destroy
+    Request.all.each do |request|
+      request.destroy
+    end
+  end
+
   private
 
   def request_params
