@@ -2,7 +2,7 @@ Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
 
-  # config.assets.compress = true
+  config.assets.compress = true
   # Code is not reloaded between requests.
   config.cache_classes = true
 
