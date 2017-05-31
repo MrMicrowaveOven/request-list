@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   </head>
   <body>
     <input type="text" name="" value="" id="content">
@@ -19,11 +19,12 @@
     </div>
     <script type="text/javascript">
       function addRequest() {
+        // console.log("FAAAAAIL");
         $.ajax({
           type: "POST",
-          url: "/requests",
+          url: "http://localhost:3000/requests",
           crossDomain: true,
-          dataType: 'jsonp',
+          dataType: 'json',
           contentType: 'application/json',
           data: {
               "content": "4ever"
@@ -38,7 +39,7 @@
             // } else {
             //   document.getElementById("response").innerHTML = "Error #" + xhr.status;
             // }
-              console.log("Fail");
+              console.log(error);
           }
       })
     }
