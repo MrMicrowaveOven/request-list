@@ -25,6 +25,7 @@ gem 'puma', '~> 3.7'
 # gem 'rack-cors'
 gem 'rack-cors', :require => 'rack/cors'
 
+gem 'rails_12factor'
 group :production do
   # Use pg as the database for Heroku
   gem 'pg'
