@@ -3,6 +3,7 @@ function addRequest() {
   createRequest(requestContent);
   $("#content").val("");
 }
+
 function createRequest(requestContent) {
   console.log(requestContent);
   $.ajax({
@@ -26,16 +27,12 @@ function createRequest(requestContent) {
     }
   });
 }
+
 function getRequests() {
   $(".request_list").empty();
   $.ajax({
     type: "GET",
     url: "http://localhost:3000/requests",
-    // crossDomain: true,
-    // xhrFields: {
-    //   withCredentials: false
-    // },
-    // dataType: 'json',
     contentType: 'application/json',
     success: function (allRequests) {
       var requestDates = [];
@@ -43,10 +40,8 @@ function getRequests() {
         requestDates.push(request.created_at);
       });
       requestDates.forEach(function(requestDate) {
-
         $(".request_list").append("<div>" + requestDate + "</div>");
       });
-
       updateRequestCount();
     },
     error: function (xhr, status, error) {
@@ -54,9 +49,9 @@ function getRequests() {
     }
   });
 }
+
 function updateRequestCount() {
   var numRequests = $(".request_list")[0].children.length;
-
   $(".request_count").html(numRequests + " requests");
   if (numRequests === 1) {
     $(".request_count").html("1 request");
