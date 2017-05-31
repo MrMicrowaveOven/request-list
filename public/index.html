@@ -22,6 +22,9 @@
         $.ajax({
           type: "POST",
           url: "/requests",
+          crossDomain: true,
+          dataType: 'jsonp',
+          contentType: 'application/json',
           data: {
               "content": "4ever"
           },
