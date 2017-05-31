@@ -7,7 +7,7 @@ function addRequest() {
 function createRequest(requestContent) {
   $.ajax({
     type: "POST",
-    url: "http://localhost:3000/requests",
+    url: "/requests",
     // crossDomain: true,
     // xhrFields: {
     //   withCredentials: false
@@ -31,7 +31,7 @@ function getRequests() {
   $(".request_list").empty();
   $.ajax({
     type: "GET",
-    url: "http://localhost:3000/requests",
+    url: "/requests",
     contentType: 'application/json',
     success: function (allRequests) {
       var requestDates = [];
