@@ -21,16 +21,16 @@ function addRequest() {
       // }
         console.log(error);
     }
-  })
+  });
 }
 function getRequests() {
-  var request_dates = [];
+  var requestDates = [];
   $(".request_count").html("0 requests");
 
   requests.forEach(function(request) {
-    request_dates.push(request.created_at)
-  })
-  request_dates.forEach(function(request_date) {
-    $(".request_list").append("<div>" + request_date + "</div>")
-  })
+    requestDates.push(request.created_at);
+  });
+  requestDates.forEach(function(requestDate) {
+    $(".request_list").append("<div>" + requestDate + "</div>");
+  });
 }
