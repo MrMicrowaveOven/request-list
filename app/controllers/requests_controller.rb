@@ -4,7 +4,7 @@ class RequestsController < ApplicationController
     if @request.save
       render json: @request.created_at
     else
-      render json: "POST FAILURE"
+      render json: {Post: "failure"}
     end
   end
 
@@ -16,6 +16,7 @@ class RequestsController < ApplicationController
     Request.all.each do |request|
       request.destroy
     end
+    render json: {allRequests: "deleted"}
   end
 
   private
