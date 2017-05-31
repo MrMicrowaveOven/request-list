@@ -26,10 +26,36 @@ I had a few early decisions to make before I even started coding.
 
 2. What API methods will I need?  I know I'll need Create, but what else?  It seems like displaying all requests will involve an Index call, but the instructions only mention the submit button affecting the list.  So then will the list not remember if the page is refreshed?  So all in all I see two options: a) Only build Create, and that's what adds to the list.  b) Build Create and Index, and have the Index call made when the page is loaded.  I'll make both, and see if I end up using Index.
 
+3. Where to host the Rails API?  I've made many front-end applications and thrown them online using Github-Pages, but once there's a full Rails Application involved I'd need to host it somewhere.  I've worked with Heroku in the past, though it's been a while, so I figured this would be my best bet.
+
 # Implementation Time
 
-## Rails API
+## Rails API - 45 minutes
 
 This went by quickly.  I decided to use the `--api` flag when generating my API, since it makes the Application Controllers a little skinnier (uses `::API` as a parent instead of `::Base`).  I wouldn't need them to have browser application functionalities anyway.  This also prevents the generators from adding views and helpers that I won't end up using.
 
-I quickly built the Requests Controller, with a simple Create and Index.  Nothing too unique about it, other than Create only returning the `created_at` data.  After a quick Post request on PostMan, and a Get request to check, I figured it was time to work on the FrontEnd.
+I quickly built the Requests Controller, with a simple Create and Index.  Nothing too unique about it, other than Create only returning the `created_at` data.  After running the Rails server, making a quick Post request on PostMan, and a Get request to check, it was time to work on the FrontEnd.
+
+## Building the FrontEnd - 1.5 hours
+
+I went with a simple entry field and submit button.  Since I knew I'd be using a Rails API, I generally prefer adding a JS function to the button's `onclick=` than making it into a submit button for a full form.  I linked the function to an AJAX request to the server.  Unfortunately, I dealt a great deal with CORS request errors when testing.  It's somewhat tough to get a Rails server to accept requests from the browser.  I'd say this took about an hour to get this to work (adding an `allow origins: "*"` to `application.rb` ended up being the solution).  I'll be adding this to my implementation timing.  Meanwhile the AJAX request was being made to `localhost:3000`, so I knew there would be some troubleshooting when this was pushed to Heroku.
+
+I took a break from the CORS errors to style the FrontEnd.  Flexbox made this super easy.
+
+## Deployment - 6 hours
+
+This easily took much longer than actually building the application.  I had my BackEnd running on the local server (tested and working via PostMan), and my FrontEnd looking great.  But getting the two to communicate is something I'm a little rusty on.  CORS requests destroyed me, which was super frustrating.  AJAX requests were not working locally.  Once I finally got those to work, a push to Heroku gave me similar issues.
+
+I had a huge issue with the page being unable to find the CSS and JS folders when pushed to Heroku.  This was very strange, since it was running fine locally.  Just to give it a try, I moved the styling and JS to the actual HTML page and pushed to Heroku, and IT WORKED.  This is a simple, frustrating problem that I've found dozens of differing solutions to (leaving me to experiment).  For the time being however, the application is working properly within a single HTML document.
+
+This is very telling that I need to focus more on deploying Rails applications to completion, so that I'm more familiar with the errors that pop up when pushing to Heroku.
+
+## Additional Work To Do
+
+The specifications mentioned nothing about a "Clear All Requests" button, so I didn't make one.  I can reset the database from my command line if need be.
+
+I wasn't entirely sure if the specs called just for a list of timestamps of the requests, or of the text within the request to be displayed as well.  I just displayed the timestamp for now (it'll be easy to change later if need be).
+
+Also, I was unsure if the Request List was supposed to continue to show previous requests.  I made it persistent, since otherwise the database would serve no purpose.
+
+Finally, all of the scripts and styles are contained on the HTML document.  This looks... bad.  I'm going to break off into a new branch and try to figure out why this is an issue.  Meanwhile, the application is working perfectly (coding practices notwithstanding).
