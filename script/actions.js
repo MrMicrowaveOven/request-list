@@ -1,24 +1,24 @@
 function addRequest() {
-  // console.log("FAAAAAIL");
+  createRequest();
+  $("#content").val("");
+}
+function createRequest() {
   $.ajax({
     type: "POST",
     url: "http://localhost:3000/requests",
-    crossDomain: true,
-    dataType: 'json',
+    // crossDomain: true,
+    // xhrFields: {
+    //   withCredentials: false
+    // },
+    // dataType: 'json',
     contentType: 'application/json',
-    data: {
+    data: JSON.stringify({
         "content": "4ever"
-    },
+    }),
     success: function (res) {
-        console.log("Success!!!");
+      console.log("Success!!!");
     },
     error: function (xhr, status, error) {
-      // if (xhr.status === 403) {
-      //   document.getElementById("response").innerHTML
-      //     = "Sorry, ran out of pings for today :(";
-      // } else {
-      //   document.getElementById("response").innerHTML = "Error #" + xhr.status;
-      // }
       console.log(error);
     }
   });
