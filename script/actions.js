@@ -1,8 +1,10 @@
 function addRequest() {
-  createRequest();
+  var requestContent = $("#content")[0].value;
+  createRequest(requestContent);
   $("#content").val("");
 }
-function createRequest() {
+function createRequest(requestContent) {
+  console.log(requestContent);
   $.ajax({
     type: "POST",
     url: "http://localhost:3000/requests",
@@ -13,10 +15,11 @@ function createRequest() {
     // dataType: 'json',
     contentType: 'application/json',
     data: JSON.stringify({
-        "content": "4ever"
+      "content": requestContent
     }),
-    success: function (res) {
-      console.log("Success!!!");
+    success: function (requestDate) {
+      $(".request_list").append("<div>" + requestDate + "</div>");
+      updateRequestCount();
     },
     error: function (xhr, status, error) {
       console.log(error);
@@ -24,19 +27,38 @@ function createRequest() {
   });
 }
 function getRequests() {
-  var requestDates = [];
+  $(".request_list").empty();
+  $.ajax({
+    type: "GET",
+    url: "http://localhost:3000/requests",
+    // crossDomain: true,
+    // xhrFields: {
+    //   withCredentials: false
+    // },
+    // dataType: 'json',
+    contentType: 'application/json',
+    success: function (allRequests) {
+      var requestDates = [];
+      allRequests.forEach(function(request) {
+        requestDates.push(request.created_at);
+      });
+      requestDates.forEach(function(requestDate) {
 
-  requests.forEach(function(request) {
-    requestDates.push(request.created_at);
+        $(".request_list").append("<div>" + requestDate + "</div>");
+      });
+
+      updateRequestCount();
+    },
+    error: function (xhr, status, error) {
+      console.log(error);
+    }
   });
-  requestDates.forEach(function(requestDate) {
-    $(".request_list").append("<div>" + requestDate + "</div>");
-  });
+}
+function updateRequestCount() {
+  var numRequests = $(".request_list")[0].children.length;
 
-  var num_requests = $(".request_list")[0].children.length;
-
-  $(".request_count").html(num_requests + " requests");
-  if (num_requests == 1) {
+  $(".request_count").html(numRequests + " requests");
+  if (numRequests === 1) {
     $(".request_count").html("1 request");
   }
 }
