@@ -58,4 +58,4 @@ I wasn't entirely sure if the specs called just for a list of timestamps of the 
 
 Also, I was unsure if the Request List was supposed to continue to show previous requests.  I made it persistent, since otherwise the database would serve no purpose.
 
-Finally, all of the scripts and styles are contained on the HTML document.  This looks... bad.  I'm going to break off into a new branch and try to figure out why this is an issue.  Meanwhile, the application is working perfectly (coding practices notwithstanding).
+Finally, all of the scripts and styles are contained on the HTML document.  This looks... bad.  I'm going to break off into a new branch and try to figure out why this is an issue.  I'm keeping the `scripts` and `css` folder, even though they are no longer in use.  Meanwhile, the application is working perfectly (best coding practices notwithstanding).
