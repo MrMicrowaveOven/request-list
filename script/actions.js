@@ -19,13 +19,12 @@ function addRequest() {
       // } else {
       //   document.getElementById("response").innerHTML = "Error #" + xhr.status;
       // }
-        console.log(error);
+      console.log(error);
     }
   });
 }
 function getRequests() {
   var requestDates = [];
-  $(".request_count").html("0 requests");
 
   requests.forEach(function(request) {
     requestDates.push(request.created_at);
@@ -33,4 +32,11 @@ function getRequests() {
   requestDates.forEach(function(requestDate) {
     $(".request_list").append("<div>" + requestDate + "</div>");
   });
+
+  var num_requests = $(".request_list")[0].children.length;
+
+  $(".request_count").html(num_requests + " requests");
+  if (num_requests == 1) {
+    $(".request_count").html("1 request");
+  }
 }
