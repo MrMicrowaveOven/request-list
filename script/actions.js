@@ -5,7 +5,6 @@ function addRequest() {
 }
 
 function createRequest(requestContent) {
-  console.log(requestContent);
   $.ajax({
     type: "POST",
     url: "http://localhost:3000/requests",

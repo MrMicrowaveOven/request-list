@@ -1,3 +1,6 @@
 Rails.application.routes.draw do
-  resources :requests, only: [:create, :index, :destroy]
+  get "/requests" => "requests#index"
+  post "/requests" => "requests#create"
+  delete "/requests" => "requests#destroy"
+  # resources :requests, only: [:create, :index, :destroy]
 end
